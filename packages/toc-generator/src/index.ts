@@ -1,11 +1,17 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 import { Command, flags } from "@oclif/command";
 import { glob } from "glob";
 import * as path from "path";
+import * as fs from "fs";
+
+const TAG_OPEN = "<!-- TOC-START -->";
+const TAG_CLOSE = "<!-- TOC-END -->";
+
+const formatFilename = (input: string) => {
+  const [filename] = input.split(".md");
+  return `${filename[0].toUpperCase()}${filename.slice(1)}`;
+};
 
 class TocGenerator extends Command {
-  static description = "describe the command here";
-
   static flags = {
     version: flags.version({ char: "v" }),
     help: flags.help({ char: "h" }),
@@ -15,30 +21,45 @@ class TocGenerator extends Command {
       required: true,
       description: "path to input folder",
     }),
-    // flag with a value (-n, --name=VALUE)
-    // name: flags.string({ char: "n", description: "name to print" }),
-    // flag with no value (-f, --force)
-    // force: flags.boolean({ char: "f" }),
+    outputFile: flags.string({
+      char: "o",
+      default: "README.md",
+      required: false,
+      description: "path to output file",
+    }),
   };
 
-  static args = [{ name: "file" }];
-
   async run() {
-    const { args, flags } = this.parse(TocGenerator);
+    const { flags } = this.parse(TocGenerator);
 
     glob(
       "**/*.md",
-      { cwd: path.resolve(flags.inputFolder), ignore: "README.md" },
-      (err, matches) => {
+      {
+        cwd: path.resolve(flags.inputFolder),
+        ignore: ["README.md", "backup.sh"],
+      },
+      (err, files) => {
         if (err) {
           this.log(err.message ?? "error");
         }
-        matches.forEach((match) => this.log(match));
+
+        const content = files
+          .map((file) => `- [${formatFilename(file)}](./${file})`)
+          .join("\n");
+        const readme = fs.readFileSync(flags.outputFile, "utf8");
+        const indexBefore = readme.indexOf(TAG_OPEN) + TAG_OPEN.length;
+        const indexAfter = readme.indexOf(TAG_CLOSE);
+        const readmeContentChunkBreakBefore = readme.substring(0, indexBefore);
+        const readmeContentChunkBreakAfter = readme.substring(indexAfter);
+
+        const readmeNew = `
+${readmeContentChunkBreakBefore}
+${content}
+${readmeContentChunkBreakAfter}
+        `;
+        fs.writeFileSync(flags.outputFile, readmeNew.trim());
       }
     );
-    // if (args.file && flags.force) {
-    //   this.log(`you input --force and --file: ${args.file}`);
-    // }
   }
 }
 
