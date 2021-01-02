@@ -9,20 +9,18 @@ Czytelnik (eng. _reader_) is a CLI tool that generates markdown list with conten
 It is useful for generating table of contents.
 
 <!-- toc -->
-
-- [Czytelnik](#czytelnik)
-- [Usage](#usage)
-- [Commands](#commands)
-- [How it is working](#how-it-is-working)
+* [Czytelnik](#czytelnik)
+* [Usage](#usage)
+* [Commands](#commands)
+* [How it is working](#how-it-is-working)
 <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g czytelnik
-$ czytelnik --inputFolder=. --outputFile=README.md
+$ czytelnik COMMAND
 running command...
 $ czytelnik (-v|--version|version)
 czytelnik/0.1.0 darwin-x64 node-v15.3.0
@@ -31,19 +29,11 @@ USAGE
   $ czytelnik COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-```sh-session
-$ czytelnik --inputFolder=.
-read current folder and write output to README.md
-$ czytelnik --inputFolder=. --outputFile=file.md
-read current folder and write output to file.md
-```
 
 <!-- commandsstop -->
 

@@ -8,7 +8,16 @@ const TAG_CLOSE = "<!-- CZYTELNIK-END -->";
 
 const formatFilename = (input: string) => {
   const [filename] = input.split(".md");
-  return `${filename[0].toUpperCase()}${filename.slice(1)}`;
+  switch (filename) {
+    case "css":
+      return "CSS";
+    case "typescript":
+      return "TypeScript";
+    case "javascript":
+      return "JavaScript";
+    default:
+      return `${filename[0].toUpperCase()}${filename.slice(1)}`;
+  }
 };
 
 class Czytelnik extends Command {
