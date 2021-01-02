@@ -1,6 +1,6 @@
 # TOC
 
-<!-- TOC-START -->
+<!-- CZYTELNIK-START -->
 - [Another-test](./another-test.md)
 - [Test](./test.md)
-<!-- TOC-END -->
+<!-- CZYTELNIK-END -->

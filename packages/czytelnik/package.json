@@ -1,11 +1,11 @@
 {
-  "name": "toc-generator",
+  "name": "czytelnik",
   "version": "0.1.0",
   "author": "Krzysztof Żuraw @krzysztofzuraw",
   "bin": {
-    "toc-generator": "./bin/run"
+    "czytelnik": "./bin/run"
   },
-  "bugs": "https://github.com/krzysztofzuraw/toc-generator/issues",
+  "bugs": "https://github.com/krzysztofzuraw/czytelnik/issues",
   "dependencies": {
     "@oclif/command": "^1",
     "@oclif/config": "^1",
@@ -30,16 +30,16 @@
     "/bin",
     "/lib"
   ],
-  "homepage": "https://github.com/krzysztofzuraw/toc-generator",
+  "homepage": "https://github.com/krzysztofzuraw/czytelnik",
   "keywords": [
     "oclif"
   ],
   "license": "MIT",
   "main": "lib/index.js",
   "oclif": {
-    "bin": "toc-generator"
+    "bin": "czytelnik"
   },
-  "repository": "krzysztofzuraw/toc-generator",
+  "repository": "krzysztofzuraw/czytelnik",
   "scripts": {
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev readme",

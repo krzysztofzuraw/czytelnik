@@ -3,15 +3,15 @@ import { glob } from "glob";
 import * as path from "path";
 import * as fs from "fs";
 
-const TAG_OPEN = "<!-- TOC-START -->";
-const TAG_CLOSE = "<!-- TOC-END -->";
+const TAG_OPEN = "<!-- CZYTELNIK-START -->";
+const TAG_CLOSE = "<!-- CZYTELNIK-END -->";
 
 const formatFilename = (input: string) => {
   const [filename] = input.split(".md");
   return `${filename[0].toUpperCase()}${filename.slice(1)}`;
 };
 
-class TocGenerator extends Command {
+class Czytelnik extends Command {
   static flags = {
     version: flags.version({ char: "v" }),
     help: flags.help({ char: "h" }),
@@ -30,7 +30,7 @@ class TocGenerator extends Command {
   };
 
   async run() {
-    const { flags } = this.parse(TocGenerator);
+    const { flags } = this.parse(Czytelnik);
 
     glob(
       "**/*.md",
@@ -63,4 +63,4 @@ ${readmeContentChunkBreakAfter}
   }
 }
 
-export = TocGenerator;
+export = Czytelnik;
